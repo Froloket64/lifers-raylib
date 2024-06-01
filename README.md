@@ -29,4 +29,4 @@ impl RenderCell<Color> for Cell {
 ```
 Then you can use it to create an `Automaton` and pass it to `RaylibFrontend` (or use `FrontendBuilder`).
 
-Also, see `examples` and [docs](https://docs.rs/latest/lifers-raylib).
+Also, see [`examples`](/examples/) and [docs](https://docs.rs/lifers-raylib).
