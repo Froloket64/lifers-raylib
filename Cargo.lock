@@ -236,7 +236,7 @@ checksum = "2fd1cbaa0325c7e43d31e01dd30ab70d066899b06de02ee3b8954647ab7db7a2"
 
 [[package]]
 name = "lifers-raylib"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "lifers",
  "rand",

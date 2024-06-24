@@ -2,7 +2,7 @@
 name = "lifers-raylib"
 description = "Raylib frontend for lifers"
 repository = "https://github.com/Froloket64/lifers-raylib.git"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 edition = "2021"
 keywords = ["cellular_automata", "game_of_life"]
