@@ -3,6 +3,7 @@ use std::time::{Duration, Instant};
 pub enum TimerState {
     Ongoing, // or whatever
     Finished,
+    Paused,
 }
 
 /// Repeating timer
@@ -12,6 +13,7 @@ pub struct RepeatingTimer {
     amount: Duration,
     time_left: Duration,
     last_checked: Instant,
+    paused: bool,
 }
 
 impl RepeatingTimer {
@@ -21,6 +23,7 @@ impl RepeatingTimer {
             amount,
             time_left: amount,
             last_checked: Instant::now(),
+            paused: false,
         }
     }
 
@@ -32,7 +35,11 @@ impl RepeatingTimer {
 
         self.last_checked = now;
 
-        self.update_state(elapsed)
+        if self.paused {
+            TimerState::Paused
+        } else {
+            self.update_state(elapsed)
+        }
     }
 
     /// Like [`update()`](Self::update), but uses [`Instant::checked_duration_since()`].
@@ -69,5 +76,18 @@ impl RepeatingTimer {
 
             TimerState::Ongoing
         }
+    }
+
+    /// Pauses or unpauses the timer, depending on it's current state.
+    ///
+    /// When paused, [`update()`](Self::update()) and similar
+    /// methods stop advancing the time and return [`TimerState::Paused`].
+    pub fn toggle_pause(&mut self) {
+        self.paused = !self.paused;
+    }
+
+    /// Returns the amount of time that each cycle takes.
+    pub fn rate(&self) -> Duration {
+        self.amount
     }
 }
