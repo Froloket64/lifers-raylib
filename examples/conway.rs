@@ -53,6 +53,8 @@ fn main() {
     while !frontend.window_should_close() {
         frontend.display_grid();
 
+        // Register the default key actions
+        frontend.default_key_actions();
         // Update the timer to compute the next generations with respect to `update_rate`
         frontend.tick();
     }
