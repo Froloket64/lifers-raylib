@@ -3,7 +3,13 @@ use lifers::{
     engine::{Automaton, ExecutionState},
     frontend::RenderCell,
 };
-use raylib::{color::Color, drawing::RaylibDraw, math::Vector2, RaylibHandle, RaylibThread};
+use raylib::{
+    color::Color,
+    drawing::RaylibDraw,
+    ffi::{KeyboardKey, MouseButton},
+    math::Vector2,
+    RaylibHandle, RaylibThread,
+};
 use std::time::Duration;
 
 /// Maps a function to both coordinates of all given vectors.
@@ -25,6 +31,7 @@ pub struct RaylibFrontend<S, D> {
 }
 
 impl<S, D> RaylibFrontend<S, D> {
+    // NOTE: This function is quite a mess
     /// Instantiates the frontend.
     ///
     /// You may want to use [`FrontendBuilder`] for convenience.
@@ -37,7 +44,7 @@ impl<S, D> RaylibFrontend<S, D> {
     ) -> Self {
         let (rl, thread) = raylib::init()
             .size(window_size.0 as i32, window_size.1 as i32)
-            .title("Game of Life - lifers")
+            .title("lifers")
             .build();
 
         let cell_margin_f = cell_margin as f32;
@@ -98,6 +105,33 @@ impl<S, D> RaylibFrontend<S, D> {
     /// See [`tick()`](Self::tick()) for properly timed updating.
     pub fn step(&mut self) -> ExecutionState {
         self.automaton.step()
+    }
+
+    /// Registers default key actions:
+    /// - Space -> Pause
+    /// - LMB -> Toggle cell under cursor
+    pub fn default_key_actions(&mut self) {
+        match self.rl.get_key_pressed() {
+            None => (),
+            Some(key) => match key {
+                KeyboardKey::KEY_SPACE => self.timer.toggle_pause(), // HACK?
+                // NOTE: Minus reduces the rate (not the time taken), equals
+                // increases the rate.
+                KeyboardKey::KEY_MINUS => {
+                    self.timer = RepeatingTimer::new(self.timer.rate() + Duration::from_millis(10))
+                }
+                KeyboardKey::KEY_EQUAL => {
+                    let duration = self
+                        .timer
+                        .rate()
+                        .checked_sub(Duration::from_millis(10))
+                        .unwrap_or(Duration::from_millis(0));
+
+                    self.timer = RepeatingTimer::new(duration);
+                }
+                _ => (),
+            },
+        }
     }
 }
 
