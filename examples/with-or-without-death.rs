@@ -58,10 +58,10 @@ fn main() {
         .run(|_, cell, neighbors_n| {
             let is_alive = match cell.kind {
                 CellKind::Normal => match cell.is_alive {
-                    true => (2..=3).contains(neighbors_n),
-                    false => *neighbors_n == 3,
+                    true => (2..=3).contains(&neighbors_n),
+                    false => neighbors_n == 3,
                 },
-                CellKind::WithoutDeath => cell.is_alive || *neighbors_n == 3,
+                CellKind::WithoutDeath => cell.is_alive || neighbors_n == 3,
             };
 
             Cell { is_alive, ..cell }

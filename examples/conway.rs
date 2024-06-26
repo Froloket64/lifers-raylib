@@ -38,8 +38,8 @@ fn main() {
         .map(|(x, y), _, cells| count_neighbors(cells, (x, y), 1, |cell| cell.is_alive))
         .run(|_, cell, neighbors_n| {
             Cell::new(match cell.is_alive {
-                true => (2..=3).contains(neighbors_n),
-                false => *neighbors_n == 3,
+                true => (2..=3).contains(&neighbors_n),
+                false => neighbors_n == 3,
             })
         });
 
