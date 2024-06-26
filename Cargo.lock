@@ -231,8 +231,6 @@ dependencies = [
 [[package]]
 name = "lifers"
 version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2fd1cbaa0325c7e43d31e01dd30ab70d066899b06de02ee3b8954647ab7db7a2"
 
 [[package]]
 name = "lifers-raylib"

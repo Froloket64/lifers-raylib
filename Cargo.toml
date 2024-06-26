@@ -9,7 +9,8 @@ keywords = ["cellular_automata", "game_of_life"]
 categories = ["simulation"]
 
 [dependencies]
-lifers = "0.2.1"
+# lifers = "0.2.1"
+lifers = { path = "../lifers" }
 raylib = "5.0.1"
 
 [dev-dependencies]
