@@ -1,13 +1,13 @@
 use lifers::prelude::*;
-use lifers_raylib::FrontendBuilder;
+use lifers_raylib::generic::FrontendBuilder;
 use rand::random;
 use raylib::prelude::*;
 use std::time::Duration;
 
-const WINDOW_SIZE: (u32, u32) = (480, 480);
-const CELLS_N: (usize, usize) = (20, 20);
+const WINDOW_SIZE: (u32, u32) = (1024, 1024);
+const CELLS_N: (usize, usize) = (200, 200);
 const CELL_MARGIN: u32 = 2;
-const UPDATE_RATE: Duration = Duration::from_millis(100);
+const UPDATE_RATE: Duration = Duration::from_millis(10);
 
 // Create your cell type
 struct Cell {
@@ -33,9 +33,10 @@ impl RenderCell<Color> for Cell {
 
 fn main() {
     // Create your automaton
-    let game = Automaton::build(CELLS_N)
+    let game = generic::Automaton::build(CELLS_N)
         .init(|_| Cell::new(random::<bool>()))
-        .map(|(x, y), _, cells| count_neighbors(cells, (x, y), 1, |cell| cell.is_alive))
+        .map(|(x, y), _, cells| generic::count_neighbors(cells, (x, y), 1, |cell| cell.is_alive))
+        // .generations(10)
         .run(|_, cell, neighbors_n| {
             Cell::new(match cell.is_alive {
                 true => (2..=3).contains(&neighbors_n),

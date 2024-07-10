@@ -9,7 +9,7 @@
 use std::time::Duration;
 
 use lifers::prelude::*;
-use lifers_raylib::FrontendBuilder;
+use lifers_raylib::generic::FrontendBuilder;
 use rand::random;
 use raylib::color::Color;
 
@@ -41,7 +41,7 @@ impl RenderCell<Color> for Cell {
 }
 
 fn main() {
-    let game = Automaton::build((CELLS_PER_AXIS, CELLS_PER_AXIS))
+    let game = generic::Automaton::build((CELLS_PER_AXIS, CELLS_PER_AXIS))
         .init(|(x, y)| {
             let kind = if x + y >= CELLS_PER_AXIS {
                 CellKind::WithoutDeath
@@ -54,7 +54,7 @@ fn main() {
                 is_alive: random(),
             }
         })
-        .map(|pos, _, cells| count_neighbors(cells, pos, 1, |cell| cell.is_alive))
+        .map(|pos, _, cells| generic::count_neighbors(cells, pos, 1, |cell| cell.is_alive))
         .run(|_, cell, neighbors_n| {
             let is_alive = match cell.kind {
                 CellKind::Normal => match cell.is_alive {

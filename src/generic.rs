@@ -1,18 +1,17 @@
+//! Implementation of the frontend for generic automata.
+
 use crate::timer::{RepeatingTimer, TimerState};
-use lifers::{
-    engine::{Automaton, ExecutionState},
-    frontend::RenderCell,
-};
+use lifers::{engine::ExecutionState, frontend::RenderCell, prelude::generic::Automaton};
 use raylib::{
-    color::Color,
-    drawing::RaylibDraw,
-    ffi::{KeyboardKey, MouseButton},
-    math::Vector2,
-    RaylibHandle, RaylibThread,
+    color::Color, drawing::RaylibDraw, ffi::KeyboardKey, math::Vector2, RaylibHandle, RaylibThread,
 };
 use std::time::Duration;
 
+// TODO:
+// - Uninfy API with / in favor of `life_like`
+
 /// Maps a function to both coordinates of all given vectors.
+#[macro_export]
 macro_rules! map_vecs {
     ($( $vec:expr ),+ => $f:expr) => {
         Vector2::new($f($( $vec.x ),+), $f($( $vec.y ),+))
@@ -73,8 +72,9 @@ impl<S, D> RaylibFrontend<S, D> {
         let grid_center = grid_size.scale_by(0.5);
         let window_center = window_size.scale_by(0.5);
 
-        // NOTE: `grid_center` is calculated with respect to the window dimensions,
-        // so it can't be greater than `window_center`
+        // NOTE: `grid_center` is calculated with respect to the
+        // window dimensions, so it can't be greater than
+        // `window_center`
         #[allow(clippy::arithmetic_side_effects)]
         let center_translation = window_center - grid_center;
 
@@ -91,11 +91,12 @@ impl<S, D> RaylibFrontend<S, D> {
 
     /// Checks if the window should close (e.g. `esc` pressed).
     pub fn window_should_close(&self) -> bool {
-        self.rl.window_should_close()
+        self.automaton.is_finished() || self.rl.window_should_close()
     }
 
-    /// Updates the inner timer to compute the next generation according
-    /// to the update rate (see [`FrontendBuilder::update_rate()`]).
+    /// Updates the inner timer to compute the next generation
+    /// according to the update rate (see
+    /// [`FrontendBuilder::update_rate()`]).
     pub fn tick(&mut self) -> Option<ExecutionState> {
         matches!(self.timer.update(), TimerState::Finished).then(|| self.automaton.step())
     }
@@ -138,9 +139,8 @@ impl<S, D> RaylibFrontend<S, D> {
 impl<S: RenderCell<Color>, D> RaylibFrontend<S, D> {
     /// Displays the cell grid using Raylib.
     ///
-    /// Manages the job of clearing the background and drawing
-    /// all the cells with respect to their [`RenderCell`]
-    /// implementation.
+    /// Manages the job of clearing the background and drawing all the
+    /// cells with respect to their [`RenderCell`] implementation.
     pub fn display_grid(&mut self) {
         let mut drawer = self.rl.begin_drawing(&self.thread);
 
