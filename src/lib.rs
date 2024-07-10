@@ -1,14 +1,20 @@
 //! Raylib frontend for [lifers].
 //!
-//! Provides [`RaylibFrontend`] that does all the displaying and rendering work.
-//! It's recommended to use [`FrontendBuilder`] for convenience.
+//! Provides `RaylibFrontend` implementations that do all the
+//! displaying and rendering work.  It's recommended to use
+//! `FrontendBuilder` for convenience.
 //!
-//! The frontend can be used in an event loop, similar to a typical Raylib
+//! _NOTE:_ See corresponding modules for different kinds of automata.
+//!
+//! The frontend can be used in an event loop, similar to a typical
+//! Raylib
 //! application:
+//!
 //! ```ignore
-//! # use lifers::engine::Automaton;
-//! # use lifers_raylib::FrontendBuilder;
-//! let game = /* Automaton */;
+//! # use lifers::prelude::*;
+//! # use lifers_raylib::generic::FrontendBuilder;
+//! let game = /* Automaton */
+//! #   todo!();
 //! let mut frontend = FrontendBuilder::new((480, 480))
 //!     .finish(game);
 //!
@@ -44,7 +50,6 @@
     clippy::module_name_repetitions
 )]
 
-mod frontend;
+pub mod generic;
+pub mod life_like;
 mod timer;
-
-pub use frontend::*;

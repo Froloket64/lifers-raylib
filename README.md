@@ -13,6 +13,7 @@ struct Cell {
 Your cells don't have to be this simple, they can have many attributes (type, group, etc.).
 
 Now just implement `RenderCell<Color>` for it:
+
 ```rust
 use raylib::color::Color;
 use lifers::frontend::RenderCell;
@@ -27,6 +28,7 @@ impl RenderCell<Color> for Cell {
     }
 }
 ```
+
 Then you can use it to create an `Automaton` and pass it to `RaylibFrontend` (or use `FrontendBuilder`).
 
 Also, see [`examples`](/examples/) and [docs](https://docs.rs/lifers-raylib).
