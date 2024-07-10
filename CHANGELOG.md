@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2024-07-10
+### 🐛 Bug Fixes
+
+- [_8ae4f6e_](https://github.com/Froloket64/lifers-raylib/commit/8ae4f6ebbd449c39a231cf546cd9206d893d712d) Add changelog _(@Froloket64)_
+
+### 📚 Documentation
+
+- [_2368995_](https://github.com/Froloket64/lifers-raylib/commit/23689955daebb314666722a5d49da0e4e0c29ed7) _(example)_ Use default key actions in `conway.rs` _(@Froloket64)_
+
+- [_8a228d6_](https://github.com/Froloket64/lifers-raylib/commit/8a228d6aec4e5209eb45bee91cc557450a6dd8c0) _(example)_ Add new example _(@Froloket64)_
+
+- [_29fc6ce_](https://github.com/Froloket64/lifers-raylib/commit/29fc6ce6fe0e5c5c09d0d76e7114cf505261ac9e) _(example)_ Update examples for `lifers 0.2.2` _(@Froloket64)_
+
+- [_3ecfa56_](https://github.com/Froloket64/lifers-raylib/commit/3ecfa56a9334304350cd7f191f39758cd0ff64ed) _(example)_ Add `conway2` example _(@Froloket64)_
+
+- [_7e0efda_](https://github.com/Froloket64/lifers-raylib/commit/7e0efda941248e3c1d6805bfbb2d34f86bdb1651) Update README.md and `lib.rs` _(@Froloket64)_
+
+### 🚀 Features
+
+- [_9ab2814_](https://github.com/Froloket64/lifers-raylib/commit/9ab2814e81c836908b0dcd7ca44ab30a9bafda2f) _(timer)_ Add pausing _(@Froloket64)_
+
+- [_6f9ce4e_](https://github.com/Froloket64/lifers-raylib/commit/6f9ce4ec95795aea57ee450195f0dc5150466bf8) _(frontend)_ Add default key actions _(@Froloket64)_
+
+- [_f749c31_](https://github.com/Froloket64/lifers-raylib/commit/f749c31be547f0c161fd664c25be0cbad1c4a12d) _(frontend)_ [**breaking**] Implemement `life_like` _(@Froloket64)_
+
 ## [0.1.1] - 2024-06-24
 
 ### 📚 Documentation
