@@ -36,7 +36,6 @@ fn main() {
     let game = generic::Automaton::build(CELLS_N)
         .init(|_| Cell::new(random::<bool>()))
         .map(|(x, y), _, cells| generic::count_neighbors(cells, (x, y), 1, |cell| cell.is_alive))
-        // .generations(10)
         .run(|_, cell, neighbors_n| {
             Cell::new(match cell.is_alive {
                 true => (2..=3).contains(&neighbors_n),

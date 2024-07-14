@@ -10,6 +10,7 @@ use std::time::Duration;
 const WINDOW_SIZE: (u32, u32) = (1024, 1024);
 const CELLS_N: (usize, usize) = (200, 200);
 const UPDATE_RATE: Duration = Duration::from_millis(10);
+const CELL_MARGIN: u32 = 0;
 
 // Create your cell type
 #[derive(Debug)]
@@ -44,7 +45,9 @@ fn main() {
     // Instantiate the frontend with your preferred settings
     let mut frontend = FrontendBuilder::default()
         .window_size(WINDOW_SIZE)
+        .grid_size(CELLS_N)
         .update_rate(UPDATE_RATE)
+        .cell_margin(CELL_MARGIN)
         .finish(game);
 
     // Event loop
