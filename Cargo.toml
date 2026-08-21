@@ -10,7 +10,7 @@ categories = ["simulation"]
 
 [dependencies]
 lifers = "0.3.0"
-raylib = "5.0.1"
+raylib = "6.0.0"
 rustc-hash = "2.0.0"
 
 [dev-dependencies]
