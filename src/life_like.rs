@@ -131,6 +131,16 @@ impl<S, D> RaylibFrontend<S, D> {
             },
         }
     }
+
+    /// Borrows the current automaton.
+    pub fn automaton(&self) -> &Automaton<S, D> {
+        &self.automaton
+    }
+
+    /// Mutably borrows the current automaton.
+    pub fn automaton_mut(&mut self) -> &mut Automaton<S, D> {
+        &mut self.automaton
+    }
 }
 
 impl<S: RenderCell<Color>, D> RaylibFrontend<S, D> {
