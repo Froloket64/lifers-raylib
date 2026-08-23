@@ -66,8 +66,8 @@ impl<S, D> RaylibFrontend<S, D> {
             grid_dimensions
             => |size, cells: f32| cells.mul_add(size, (cells + 1.) * cell_margin_f)
         );
-        let grid_center = grid_size.scale_by(0.5);
-        let window_center = window_size.scale_by(0.5);
+        let grid_center = grid_size.scale(0.5);
+        let window_center = window_size.scale(0.5);
 
         // NOTE: `grid_center` is calculated with respect to the window dimensions,
         // so it can't be greater than `window_center`
@@ -130,6 +130,16 @@ impl<S, D> RaylibFrontend<S, D> {
                 _ => (),
             },
         }
+    }
+
+    /// Borrows the current automaton.
+    pub fn automaton(&self) -> &Automaton<S, D> {
+        &self.automaton
+    }
+
+    /// Mutably borrows the current automaton.
+    pub fn automaton_mut(&mut self) -> &mut Automaton<S, D> {
+        &mut self.automaton
     }
 }
 
